@@ -1,0 +1,114 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.IssueBooksToDSA>
+
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+    </script>
+}
+ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Issue Book To DSA
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Issue Book</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("Issue Book", "Create", "IssueBooksToDSAs", null, new { @class = "btn btn-primary" })
+    </p>
+    <table id="datatable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssueTo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssuedDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SendToAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssuedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StartSNo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EndSno)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Location)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IssuedFrom)
+                </th>
+                <th></th>
+            </tr>
+            </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssueTo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SendToAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartSNo)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EndSno)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IssuedFrom)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IssueBookID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IssueBookID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IssueBookID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

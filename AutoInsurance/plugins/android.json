@@ -1,0 +1,42 @@
+{
+    "prepare_queue": {
+        "installed": [],
+        "uninstalled": []
+    },
+    "config_munge": {
+        "files": {}
+    },
+    "installed_plugins": {
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-sqlite-storage": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        },
+        "cordova-plugin-mauron85-background-geolocation": {
+            "ACCOUNT_TYPE": "$PACKAGE_NAME.account",
+            "CONTENT_AUTHORITY": "$PACKAGE_NAME",
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        }
+    },
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.gleamfuture.autoinsurance"
+        }
+    }
+}

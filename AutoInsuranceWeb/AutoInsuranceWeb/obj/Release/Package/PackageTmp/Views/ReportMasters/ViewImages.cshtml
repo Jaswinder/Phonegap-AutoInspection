@@ -1,0 +1,111 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.ReportImages>
+
+@{
+    ViewBag.Title = "ViewImages";
+}
+@section scripts {
+
+
+    
+    <script type="text/javascript">
+    $(function () {
+        $("#btnSubmit").click(function () {
+            $("input[name='GridHtml']").val($("#divcontent").html());
+        });
+    });
+    </script>
+    }
+<h2>ViewImages</h2>
+@using (Html.BeginForm("Export", "TempReportMasters", FormMethod.Post))
+{
+    <input type="hidden" name="GridHtml" />
+    <input type="hidden" name="ID" value="@ViewBag.ReportID" />
+    <input type="submit" id="btnSubmit" value="Export" />
+}
+ <!-- Content Header (Page header) -->
+<section class="content-header">
+
+    @*<div class="zoom-small-image">
+            <a href='~/Content/Zoom/bigimage00.jpg' class='cloud-zoom' id='zoom1' rel="adjustX:10, adjustY:-4"><img src="~/Content/Zoom/smallimage.jpg" alt='' title="Zoom" /></a>
+        </div>*@
+    <h1>
+        Report Detail
+        <small></small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content" id="divcontent">
+    @{ 
+        if (ViewBag.ReportObj != null)
+        {
+            AutoInsuranceWeb.Models.ReportMaster reportObj = ViewBag.ReportObj;
+
+    <table class="table">
+        <tr>
+            <td><b>Report Number</b></td>
+            <td>@reportObj.ReportNumber</td>
+            <td><b>Book Number</b></td>
+            <td>@reportObj.BookNumber</td>
+        </tr>
+        <tr>
+            <td><b>Ch. Number</b></td>
+            <td>@reportObj.ChassisNumber</td>
+            <td><b>Veh. Number</b></td>
+            <td>@reportObj.VehicleNumber</td>
+        </tr>
+        <tr>
+            <td><b>Vehicle Type</b></td>
+            <td>@ViewBag.VehicleCategory </td>
+            <td><b>Company</b></td>
+            <td>@reportObj.CompanyName</td>
+        </tr>
+    </table>
+            }
+        }
+
+    <table class="table">
+        <tr>
+
+
+            <th>
+                @Html.DisplayNameFor(model => model.ImageType)
+            </th>
+
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Longitude)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Latitude)
+                </th>*@
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@item.ImagePathStemped" class="img img-responsive" />
+                    @Html.DisplayFor(modelItem => item.ImageType)
+                </td>
+
+
+
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>*@
+
+
+            </tr>
+        }
+
+    </table>
+
+</section>

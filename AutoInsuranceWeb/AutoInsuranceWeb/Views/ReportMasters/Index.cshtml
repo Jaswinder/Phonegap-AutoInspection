@@ -1,0 +1,261 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.ReportMaster>
+
+@{
+    ViewBag.Title = "Index";
+}
+  <!-- bootstrap datepicker -->
+<link rel="stylesheet" href="~/Content/plugins/datepicker/datepicker3.css">
+
+@section scripts {
+        <!-- bootstrap datepicker -->
+
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    @*<script>
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+    </script>*@
+
+<script type="text/javascript" src="jquery-1.12.0.min.js"></script>
+
+<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.4/js/dataTables.tableTools.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/tabletools/2.2.2/swf/copy_csv_xls_pdf.swf"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.11/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/dataTables.buttons.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.flash.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.html5.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/buttons/1.1.2/js/buttons.print.min.js"></script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#datatable').DataTable({
+            "pageLength": 50,
+            dom: 'Bfrtip',
+            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+        });
+
+        $('#fromdate').datepicker({
+            autoclose: true,
+            dateFormat: 'mm-dd-yyyy' 
+        });
+        $('#todate').datepicker({
+
+            autoclose: true,
+            dateFormat: 'mm-dd-yyyy' 
+        });
+
+    });
+    function searchbth() {
+        location.href = "/ReportMasters/Index?startdate=" + $("#fromdate").val() + "&enddate=" + $("#todate").val();
+    }
+</script>
+    <style type="text/css" >
+        .dt-button{
+
+            margin : 20px;
+        }
+    </style>
+}
+ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Report Master
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Repost Master</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    @*<p>
+            @Html.ActionLink("Create New", "Create")
+        </p>*@
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
+            <input type="text" class="form-control datepicker" id="fromdate" value="@ViewBag.fromdate" />
+        </div>
+        <div class="col-md-3">
+            <input type="text" class="form-control datepicker" id="todate" value="@ViewBag.todate" />
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary" onclick="searchbth()">Search</button>
+        </div>
+    </div>
+
+    <table id="datatable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <td>
+                    Report Number
+                </td>
+                <td>
+                    Surveyor Name
+                </td>
+                <td>
+                    Date
+                </td>
+                <td>
+                    Vehicle Type
+                </td>
+                <td>
+                    Vehicle Number
+                </td>
+                <td>
+                    Chassis Number
+                </td>
+                <td>
+                    Book Number
+                </td>
+                <td>
+                    Company Name
+                </td>
+                
+               
+                @*<th>
+                        @Html.DisplayNameFor(model => model.UserId)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.StartDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FinishDate)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Status)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsLocked)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VehicleCategoryID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VehicleNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ChassisNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BookNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Comment)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CompanyName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Longitude)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Latitude)
+                    </th>*@
+                @*<th>
+                        @Html.DisplayNameFor(model => model.ClientLocation)
+                    </th>*@
+                <th></th>
+            </tr>
+            </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @if(item.StartDate!=null)
+                        {
+                            <span>@item.StartDate</span>
+                        }
+                        
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChassisNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                   
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinishDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsLocked)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleCategoryID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.VehicleNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ChassisNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BookNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CompanyName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Longitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Latitude)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ClientLocation)
+                    </td>*@
+                    <td>
+                        @Html.ActionLink("View Images", "ViewImages", new { id = item.ReportID }) |
+                        @Html.ActionLink("Download Images", "DownloadImages", new { id = item.ReportID }) |
+                        @Html.ActionLink("Download Videos", "DownloadVideos", new { id = item.ReportID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>

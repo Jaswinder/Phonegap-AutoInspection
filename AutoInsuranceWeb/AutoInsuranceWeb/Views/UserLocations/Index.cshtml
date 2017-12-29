@@ -1,0 +1,138 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.UserLocationHistory>
+@{
+    Layout = "";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>User Tracking</title>
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <style>
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        .left-col {
+            width: 80%;
+            float: left;
+        }
+        .right-col {
+            width: 20%;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+   
+    <div id="map" class="left-col"></div>
+    <div class="right-col">
+        <a href="/Home/Index">Go Back</a><br />
+        <p style="margin-left:10%">Surveyor Available</p><br />
+        <ul id="SurveyorAvailable">
+
+        </ul>
+    </div>
+    <script>
+        var markers = [
+            {
+                "title": "Chennai",
+                "lat": 12.897489183755905,
+                "lng": 80.2880859375,
+                "description": "Chennai"
+            },
+        ];
+        $(document).ready(function () {
+
+            $.ajax({
+                type: "POST",
+                url: '/UserLocations/GetMap',
+                success: function (data) {
+                    var result = JSON.stringify(data);
+                    markers = [];
+                    for (var i = 0; i < data.length; ++i) {
+                        item = {}
+                        item["title"] = data[i].Name;
+                        item["lat"] = data[i].Latitude;
+                        item["lng"] = data[i].Longitude;
+                        item["description"] = data[i].Description;
+                        markers.push(item);
+                    }
+                    initMap(0, markers[0].lat, markers[0].lng);
+                },
+                error: function (xhr) {
+                    console.log(xhr.responseText);
+                }
+            });
+        });
+        function initMap(clickFlag, latFlag, lngFlag) {
+
+
+            var mapOptions;
+
+            if (clickFlag == 1) {
+                 mapOptions = {
+                     center: new google.maps.LatLng(latFlag, lngFlag),
+                    zoom: 12,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    //  marker:true
+                };
+            } else {
+                 mapOptions = {
+                     center: new google.maps.LatLng(latFlag, lngFlag),
+                    zoom: 8,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                    //  marker:true
+                };
+            }
+
+            var infoWindow = new google.maps.InfoWindow();
+            var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            $("#SurveyorAvailable").empty();
+            for (i = 0; i < markers.length; i++) {
+
+                var data = markers[i]
+                var myLatlng = new google.maps.LatLng(data.lat, data.lng);
+                var marker = new google.maps.Marker({
+                    position: myLatlng,
+                    map: map,
+                    title: data.title
+                });
+
+                $("#SurveyorAvailable").append('<li><a onclick=initMap(1,' + data.lat + ',' + data.lng +');><span class="">' + data.title +'</span></a></li>');
+                (function (marker, data) {
+
+                    // Attaching a click event to the current marker
+                    google.maps.event.addListener(marker, "click", function (e) {
+                        infoWindow.setContent(data.description);
+                        infoWindow.open(map, marker);
+                    });
+                    infoWindow.setContent(data.description);
+                    infoWindow.open(map, marker);
+                })(marker, data);
+            }
+
+
+        }
+
+        function initialize(lat, lng) {
+            var myLatlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 12,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            new google.maps.Map(document.getElementById("map"), myOptions);
+        }
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCDNiTIO-uSQiATquw5ZGBjg8ipZp_Djeo">
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.ReportStatus>
+
+@{
+    ViewBag.Title = "Index";
+}
+@section scripts {
+
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('#datatable').DataTable();
+    });
+    </script>
+}
+ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        Report Status
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="active">Report Status</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("Create New", "Create", "ReportStatus", null, new { @class = "btn btn-primary" })
+    </p>
+    <table id="datatable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ReportStatusName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ReportStatusName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.ReportStatusID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.ReportStatusID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.ReportStatusID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</section>

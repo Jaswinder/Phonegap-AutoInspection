@@ -1,0 +1,130 @@
+﻿@model IEnumerable<AutoInsuranceWeb.Models.ApplicationUser>
+
+@{
+    ViewBag.Title = "ViewROs";
+}
+@section scripts {
+
+    <link href="//cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#datatable').DataTable({
+                "scrollX": true
+            });
+        });
+    </script>
+}
+ <!-- Content Header (Page header) -->
+<section class="content-header">
+    <h1>
+        ROs List
+        <small>Control panel</small>
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+        <li class="active">RO's List</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+
+    <p>
+        @Html.ActionLink("Create New", "RegisterRO", "Account" , null, new { @class = "btn btn-primary" })
+    </p>
+    <table id="datatable" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th>
+                   Username
+                </th>
+                <th>
+                   Full Name
+                </th>
+                <th>
+                    Father Name
+                </th>
+                <th>
+                    MobileNumber
+                </th>
+
+                <th>
+                    Join Date
+                </th>
+
+                <th>
+                    Address
+                </th>
+                <th>
+                    Gender
+                </th>
+
+                <th>
+                    Status
+                </th>
+                <th>
+                   E-mail
+                </th>
+                
+
+                <th>
+                    Action
+                </th>
+            </tr>
+
+
+
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FatherName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MobileNumber)
+                    </td>
+                    
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                   
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Gender)
+                    </td>
+                    
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <span>Active</span>
+                        }
+                        else
+                        {
+                            <span>Deactive</span>
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                   
+                    
+                    <td>
+                        @Html.ActionLink("Change Password", "ChangeROPassword", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "EditRO", new { id = item.Id }) |
+                        @*@Html.ActionLink("Deactivate", "Deactivate", new { id = item.Id })*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
